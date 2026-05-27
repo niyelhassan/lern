@@ -1,57 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>lern</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Inter", "ui-sans-serif", "system-ui"],
-            },
-          },
-        },
-      };
-    </script>
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body class="bg-white text-black font-sans min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="px-8 py-6 flex items-center justify-between border-b border-gray-100">
-      <span class="text-xl font-bold tracking-tight">lern</span>
-    </header>
+  <body class="h-screen overflow-hidden bg-[#f7f8fb] text-neutral-950 antialiased">
 
-    <!-- Main -->
-    <main class="flex-1 flex flex-col items-center justify-center px-8 text-center">
-      <h1 class="text-6xl sm:text-8xl font-bold tracking-tighter leading-none mb-6">
-        lern
-      </h1>
-      <p class="text-base sm:text-lg font-light text-gray-500 mb-10 max-w-sm">
-        Something new is on its way.
-      </p>
-      <span class="inline-block border border-black text-black text-xs font-medium tracking-widest uppercase px-5 py-2">
-        Coming Soon
-      </span>
-    </main>
+    <div class="fixed inset-0 pointer-events-none" style="background:radial-gradient(55% 45% at 92% 4%,rgba(10,10,10,0.06),transparent 68%),radial-gradient(40% 50% at 2% 96%,rgba(10,10,10,0.04),transparent 60%)"></div>
 
-    <!-- Footer -->
-    <footer class="px-8 py-6 border-t border-gray-100 text-center">
-      <p class="text-xs text-gray-400 tracking-wide">&copy; 2026 lern</p>
-    </footer>
+    <div class="relative h-full flex items-center">
+      <div class="mx-auto max-w-6xl w-full px-8 sm:px-14">
+
+        <!-- Hero grid -->
+        <div class="grid gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:items-center page-shell">
+
+          <!-- Copy -->
+          <div class="space-y-6">
+            <div class="space-y-4">
+              <h1 style="font-size:clamp(3rem,5.5vw,5.4rem);font-weight:650;letter-spacing:-0.045em;line-height:0.9">lern</h1>
+              <p style="font-size:clamp(1.05rem,2vw,1.35rem);color:rgb(82 82 82);line-height:1.3;font-weight:500;max-width:280px">
+                Understand better,<br />research smarter.
+              </p>
+            </div>
+
+            <p style="font-size:0.88rem;color:rgb(115 115 115);line-height:1.7;max-width:310px">
+              Type any research topic. Get a short AI-narrated video lesson with a before-and-after quiz to measure what you learned.
+            </p>
+
+            <div style="display:flex;align-items:baseline;gap:5px">
+              <span style="font-size:1.75rem;font-weight:700;letter-spacing:-0.03em;color:rgb(10 10 10)">$10</span>
+              <span style="font-size:0.85rem;color:rgb(163 163 163);font-weight:500">/ month</span>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3">
+              <a href="#" class="btn-primary">Get started</a>
+              <a href="onboarding.html" class="btn-secondary">Instructions</a>
+            </div>
+          </div>
+
+          <!-- App demo -->
+          <div class="drift-in drift-in-delay-2">
+            <div class="walkthrough-stage">
+              <div class="walkthrough-toolbar">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="walkthrough-body" style="padding:20px 24px">
+                <div class="demo-gen" style="height:auto;align-content:start;gap:8px">
+                  <label>Topic</label>
+                  <div class="input typed" id="hero-typed"></div>
+                  <label style="margin-top:2px">Research area</label>
+                  <div class="input misc" id="hero-area"></div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px">
+                    <div>
+                      <label>Length</label>
+                      <div class="input misc" style="margin-top:5px">Short (~1 min)</div>
+                    </div>
+                    <div>
+                      <label>Level</label>
+                      <div class="input misc" style="margin-top:5px">College</div>
+                    </div>
+                  </div>
+                  <div style="margin-top:6px">
+                    <button class="gen-btn" tabindex="-1" style="cursor:default;pointer-events:none;width:100%;text-align:center">
+                      Generate lesson
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Features — same container, sits naturally below the grid -->
+        <div class="mt-10 grid sm:grid-cols-3 gap-0 sm:divide-x sm:divide-neutral-200/50">
+          <div class="sm:pr-8">
+            <span class="eyebrow">01</span>
+            <h3 class="font-semibold text-sm mt-1 mb-1">AI Video Lessons</h3>
+            <p class="text-xs text-neutral-500 leading-relaxed">Enter any topic and get a narrated, animated explainer generated in minutes.</p>
+          </div>
+          <div class="sm:px-8">
+            <span class="eyebrow">02</span>
+            <h3 class="font-semibold text-sm mt-1 mb-1">Before and After Quizzes</h3>
+            <p class="text-xs text-neutral-500 leading-relaxed">Test before and after each lesson to see exactly how much you learned.</p>
+          </div>
+          <div class="sm:pl-8">
+            <span class="eyebrow">03</span>
+            <h3 class="font-semibold text-sm mt-1 mb-1">Any Research Area</h3>
+            <p class="text-xs text-neutral-500 leading-relaxed">Add field context to get explanations tailored to your area of study.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const topicEl = document.getElementById("hero-typed");
+        const areaEl  = document.getElementById("hero-area");
+        if (!topicEl) return;
+        const examples = [
+          { topic: "Why transformers changed language models", area: "Computer Science" },
+          { topic: "How CRISPR edits DNA",                    area: "Biology"           },
+          { topic: "Bayes theorem applied to genetics data",  area: "Biology"           },
+          { topic: "Why black holes bend light",              area: "Physics"           },
+        ];
+        let idx = 0, charIdx = 0, deleting = false;
+        if (areaEl) areaEl.textContent = examples[0].area;
+        function tick() {
+          const text = examples[idx].topic;
+          topicEl.textContent = text.slice(0, charIdx);
+          if (deleting) {
+            charIdx--;
+            if (charIdx <= 0) {
+              charIdx = 0; deleting = false;
+              idx = (idx + 1) % examples.length;
+              if (areaEl) areaEl.textContent = examples[idx].area;
+            }
+          } else {
+            charIdx++;
+            if (charIdx > text.length + 10) deleting = true;
+          }
+          setTimeout(tick, deleting ? 28 : 55);
+        }
+        tick();
+      })();
+    </script>
+
   </body>
 </html>

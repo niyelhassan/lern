@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>lern — Instructions</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="min-h-screen bg-[#f7f8fb] text-neutral-950 antialiased">
+    <section
+      class="fixed inset-0 z-50 overflow-hidden bg-[#f7f8fb]"
+      id="obRoot"
+    >
+      <div class="onboarding-stage-bg"></div>
+
+      <div class="ob-progress" aria-hidden="true">
+        <span id="obProgress"></span>
+      </div>
+
+      <a
+        href="index.html"
+        class="absolute left-6 top-6 z-20 text-lg font-semibold tracking-tight"
+        >lern</a
+      >
+      <a
+        href="index.html"
+        class="absolute right-5 top-5 z-20 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium text-neutral-500 transition hover:border-neutral-400 hover:text-neutral-950"
+        >Skip</a
+      >
+
+      <div class="onboarding-stage" id="obStage">
+        <!-- Step 1 -->
+        <article class="onboarding-slide active" data-slide="0">
+          <div>
+            <span class="eyebrow-pill">Step 1</span>
+            <h1>Enter your topic.</h1>
+            <p class="lead">
+              Type what you want to learn: any concept, any field. Add a
+              research area, pick a length and difficulty level, then hit
+              generate.
+            </p>
+          </div>
+          <div class="walkthrough-stage">
+            <div class="walkthrough-toolbar">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="walkthrough-body walkthrough-body-simple">
+              <video
+                class="demo-window-video"
+                muted
+                playsinline
+                preload="metadata"
+                data-demo-segment="0"
+                aria-label="Step 1 demo"
+              >
+                <source src="./lern_demo.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <!-- Step 2 -->
+        <article class="onboarding-slide" data-slide="1">
+          <div>
+            <span class="eyebrow-pill">Step 2</span>
+            <h1>Take the<br />pre-quiz.</h1>
+            <p class="lead">
+              Five questions on your topic appear before the lesson. Answer
+              honestly. This is your baseline score before watching anything.
+            </p>
+          </div>
+          <div class="walkthrough-stage">
+            <div class="walkthrough-toolbar">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="walkthrough-body walkthrough-body-simple">
+              <video
+                class="demo-window-video"
+                muted
+                playsinline
+                preload="metadata"
+                data-demo-segment="1"
+                aria-label="Step 2 demo"
+              >
+                <source src="./lern_demo.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <!-- Step 3 -->
+        <article class="onboarding-slide" data-slide="2">
+          <div>
+            <span class="eyebrow-pill">Step 3</span>
+            <h1>Watch the<br />lesson.</h1>
+            <p class="lead">
+              A short animated explainer, narrated and built just for your
+              topic. Use the chapter markers to jump to any section.
+            </p>
+          </div>
+          <div class="walkthrough-stage">
+            <div class="walkthrough-toolbar">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="walkthrough-body walkthrough-body-simple">
+              <video
+                class="demo-window-video"
+                muted
+                playsinline
+                preload="metadata"
+                data-demo-segment="2"
+                aria-label="Step 3 demo"
+              >
+                <source src="./lern_demo.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <!-- Step 4 -->
+        <article class="onboarding-slide" data-slide="3">
+          <div>
+            <span class="eyebrow-pill">Step 4</span>
+            <h1>Retake.<br />See the lift.</h1>
+            <p class="lead">
+              The same five questions, post-lesson. Your before and after scores
+              show exactly what you retained.
+            </p>
+          </div>
+          <div class="walkthrough-stage">
+            <div class="walkthrough-toolbar">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="walkthrough-body walkthrough-body-simple">
+              <video
+                class="demo-window-video"
+                muted
+                playsinline
+                preload="metadata"
+                data-demo-segment="3"
+                aria-label="Step 4 demo"
+              >
+                <source src="./lern_demo.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <!-- Risks and Hazards -->
+        <article
+          class="onboarding-slide"
+          data-slide="4"
+          style="grid-template-columns: minmax(0, 1fr)"
+        >
+          <div style="max-width: 600px; margin: 0 auto">
+            <h1
+              style="
+                font-size: clamp(1.9rem, 3vw, 2.6rem);
+                letter-spacing: -0.03em;
+                line-height: 1.05;
+                font-weight: 650;
+              "
+            >
+              Risks &amp; Hazards.
+            </h1>
+            <p class="lead">Please read the following before using lern.</p>
+
+            <div style="margin-top: 28px">
+              <div
+                style="
+                  display: flex;
+                  align-items: flex-start;
+                  gap: 14px;
+                  padding: 16px 0;
+                  border-bottom: 1px solid rgb(229 229 229);
+                "
+              >
+                <div
+                  style="
+                    width: 22px;
+                    height: 22px;
+                    border-radius: 999px;
+                    background: rgb(254 243 199);
+                    border: 1px solid rgb(253 230 138);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                    margin-top: 1px;
+                  "
+                >
+                  <span
+                    style="
+                      font-size: 0.62rem;
+                      font-weight: 800;
+                      color: rgb(217 119 6);
+                    "
+                    >!</span
+                  >
+                </div>
+                <div>
+                  <p
+                    style="
+                      font-size: 0.9rem;
+                      font-weight: 600;
+                      color: rgb(10 10 10);
+                      margin-bottom: 3px;
+                    "
+                  >
+                    AI content may be inaccurate.
+                  </p>
+                  <p
+                    style="
+                      font-size: 0.83rem;
+                      color: rgb(115 115 115);
+                      line-height: 1.6;
+                    "
+                  >
+                    Always verify important information with authoritative
+                    sources before using it in academic or professional work.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                style="
+                  display: flex;
+                  align-items: flex-start;
+                  gap: 14px;
+                  padding: 16px 0;
+                  border-bottom: 1px solid rgb(229 229 229);
+                "
+              >
+                <div
+                  style="
+                    width: 22px;
+                    height: 22px;
+                    border-radius: 999px;
+                    background: rgb(254 243 199);
+                    border: 1px solid rgb(253 230 138);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                    margin-top: 1px;
+                  "
+                >
+                  <span
+                    style="
+                      font-size: 0.62rem;
+                      font-weight: 800;
+                      color: rgb(217 119 6);
+                    "
+                    >!</span
+                  >
+                </div>
+                <div>
+                  <p
+                    style="
+                      font-size: 0.9rem;
+                      font-weight: 600;
+                      color: rgb(10 10 10);
+                      margin-bottom: 3px;
+                    "
+                  >
+                    Not a substitute for formal education.
+                  </p>
+                  <p
+                    style="
+                      font-size: 0.83rem;
+                      color: rgb(115 115 115);
+                      line-height: 1.6;
+                    "
+                  >
+                    lern is a learning aid, not a replacement for textbooks,
+                    courses, or expert guidance.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                style="
+                  display: flex;
+                  align-items: flex-start;
+                  gap: 14px;
+                  padding: 16px 0;
+                "
+              >
+                <div
+                  style="
+                    width: 22px;
+                    height: 22px;
+                    border-radius: 999px;
+                    background: rgb(254 243 199);
+                    border: 1px solid rgb(253 230 138);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                    margin-top: 1px;
+                  "
+                >
+                  <span
+                    style="
+                      font-size: 0.62rem;
+                      font-weight: 800;
+                      color: rgb(217 119 6);
+                    "
+                    >!</span
+                  >
+                </div>
+                <div>
+                  <p
+                    style="
+                      font-size: 0.9rem;
+                      font-weight: 600;
+                      color: rgb(10 10 10);
+                      margin-bottom: 3px;
+                    "
+                  >
+                    Requires internet.
+                  </p>
+                  <p
+                    style="
+                      font-size: 0.83rem;
+                      color: rgb(115 115 115);
+                      line-height: 1.6;
+                    "
+                  >
+                    Do not close the tab while a lesson is generating; this will
+                    cancel the job.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="onboarding-controls">
+        <button type="button" id="prevSlide" class="btn-secondary">Back</button>
+        <div id="onboardingDots" class="onboarding-dots"></div>
+        <button type="button" id="nextSlide" class="btn-primary">Next →</button>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        const slides = Array.from(
+          document.querySelectorAll(".onboarding-slide"),
+        );
+        const dotsRoot = document.getElementById("onboardingDots");
+        const prevBtn = document.getElementById("prevSlide");
+        const nextBtn = document.getElementById("nextSlide");
+        const progress = document.getElementById("obProgress");
+        const root = document.getElementById("obRoot");
+        const demos = Array.from(
+          document.querySelectorAll(".demo-window-video"),
+        );
+        const demoSegments = [
+          { start: 0, end: 15 },
+          { start: 16, end: 29 },
+          { start: 30, end: 106 },
+          { start: 107, end: 115 },
+        ];
+        let demoDuration = 0;
+        let active = 0;
+
+        slides.forEach((_, i) => {
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "onboarding-dot";
+          dot.addEventListener("click", () => go(i));
+          dotsRoot.appendChild(dot);
+        });
+        const dots = Array.from(dotsRoot.children);
+
+        function go(i) {
+          i = Math.max(0, Math.min(slides.length - 1, i));
+          slides.forEach((slide, si) => {
+            slide.classList.toggle("active", si === i);
+            slide.classList.toggle("exit-up", si < i);
+          });
+          dots.forEach((dot, di) => dot.classList.toggle("active", di === i));
+          active = i;
+          progress.style.width = ((i + 1) / slides.length) * 100 + "%";
+          prevBtn.style.visibility = i === 0 ? "hidden" : "visible";
+          nextBtn.textContent = i === slides.length - 1 ? "Done" : "Next →";
+          playActiveDemo();
+        }
+
+        prevBtn.addEventListener("click", () => go(active - 1));
+        nextBtn.addEventListener("click", () => {
+          if (active === slides.length - 1) {
+            window.location.href = "index.html";
+          } else {
+            go(active + 1);
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowRight" || event.key === "Enter") {
+            event.preventDefault();
+            nextBtn.click();
+          } else if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            if (prevBtn.style.visibility !== "hidden") prevBtn.click();
+          } else if (event.key === "Escape") {
+            window.location.href = "index.html";
+          }
+        });
+
+        let wheelLock = false;
+        root.addEventListener(
+          "wheel",
+          (event) => {
+            if (Math.abs(event.deltaY) < 24 || wheelLock) return;
+            wheelLock = true;
+            if (event.deltaY > 0) go(active + 1);
+            else go(active - 1);
+            setTimeout(() => (wheelLock = false), 720);
+          },
+          { passive: true },
+        );
+
+        let touchY = null;
+        root.addEventListener("touchstart", (event) => {
+          touchY = event.touches[0].clientY;
+        });
+        root.addEventListener("touchend", (event) => {
+          if (touchY == null) return;
+          const dy = touchY - event.changedTouches[0].clientY;
+          if (Math.abs(dy) > 40) {
+            if (dy > 0) go(active + 1);
+            else go(active - 1);
+          }
+          touchY = null;
+        });
+
+        function segmentBounds(video) {
+          const duration = demoDuration || video.duration || 0;
+          const segment = Number(video.dataset.demoSegment || 0);
+          const bounds = demoSegments[segment];
+          if (!bounds) return { start: 0, end: 0 };
+          return {
+            start: Math.min(bounds.start, duration),
+            end: Math.min(bounds.end, duration),
+          };
+        }
+
+        function restartSegment(video) {
+          const bounds = segmentBounds(video);
+          if (bounds.end <= bounds.start) return;
+          resetPlaybackSpeed(video);
+          video.currentTime = bounds.start;
+          video.play().catch(() => {});
+        }
+
+        function resetPlaybackSpeed(video) {
+          video.defaultPlaybackRate = 1;
+          video.playbackRate = 1;
+        }
+
+        function playActiveDemo() {
+          demos.forEach((video) => {
+            const slide = video.closest(".onboarding-slide");
+            const slideIdx = slide ? parseInt(slide.dataset.slide) : -1;
+            if (slideIdx === active) {
+              restartSegment(video);
+            } else {
+              video.pause();
+            }
+          });
+        }
+
+        demos.forEach((video) => {
+          resetPlaybackSpeed(video);
+          video.addEventListener("loadedmetadata", () => {
+            resetPlaybackSpeed(video);
+            demoDuration = video.duration || demoDuration;
+            const slide = video.closest(".onboarding-slide");
+            const slideIdx = slide ? parseInt(slide.dataset.slide) : -1;
+            if (slideIdx === active) restartSegment(video);
+          });
+          video.addEventListener("play", () => resetPlaybackSpeed(video));
+          video.addEventListener("timeupdate", () => {
+            const bounds = segmentBounds(video);
+            if (
+              bounds.end > bounds.start &&
+              video.currentTime >= bounds.end - 0.08
+            ) {
+              video.currentTime = bounds.start;
+              video.play().catch(() => {});
+            }
+          });
+        });
+
+        go(0);
+      })();
+    </script>
+  </body>
+</html>
