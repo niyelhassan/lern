@@ -3,16 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>lern</title>
+    <title>lern — Video lessons from research topics</title>
+    <meta name="description" content="Turn a research topic into a short narrated video lesson, with quizzes before and after to check your understanding." />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./utilities.css" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body class="h-screen overflow-hidden bg-[#f7f8fb] text-neutral-950 antialiased">
+  <body class="min-h-screen bg-[#f7f8fb] text-neutral-950 antialiased">
 
     <div class="fixed inset-0 pointer-events-none" style="background:radial-gradient(55% 45% at 92% 4%,rgba(10,10,10,0.06),transparent 68%),radial-gradient(40% 50% at 2% 96%,rgba(10,10,10,0.04),transparent 60%)"></div>
 
-    <div class="relative h-full flex items-center">
+    <div class="relative min-h-screen flex items-center py-12 sm:py-16">
       <div class="mx-auto max-w-6xl w-full px-8 sm:px-14">
 
         <!-- Hero grid -->
@@ -28,17 +29,11 @@
             </div>
 
             <p style="font-size:0.88rem;color:rgb(115 115 115);line-height:1.7;max-width:310px">
-              Type any research topic. Get a short AI-narrated video lesson with a before-and-after quiz to measure what you learned.
+              Type any research topic. Get a short AI-narrated video lesson with a before-and-after quiz to check your understanding.
             </p>
 
-            <div style="display:flex;align-items:baseline;gap:5px">
-              <span style="font-size:1.75rem;font-weight:700;letter-spacing:-0.03em;color:rgb(10 10 10)">$10</span>
-              <span style="font-size:0.85rem;color:rgb(163 163 163);font-weight:500">/ month</span>
-            </div>
-
             <div class="flex flex-wrap items-center gap-3">
-              <a href="#" class="btn-primary">Get started</a>
-              <a href="onboarding.html" class="btn-secondary">Instructions</a>
+              <a href="onboarding.html" class="btn-primary">Get started</a>
             </div>
           </div>
 
@@ -49,11 +44,11 @@
                 <span></span><span></span><span></span>
               </div>
               <div class="walkthrough-body" style="padding:20px 24px">
-                <div class="demo-gen" style="height:auto;align-content:start;gap:8px">
+                <div aria-hidden="true" class="demo-gen" style="height:auto;align-content:start;gap:8px">
                   <label>Topic</label>
-                  <div class="input typed" id="hero-typed"></div>
+                  <div class="input typed" id="hero-typed">Why transformers changed language models</div>
                   <label style="margin-top:2px">Research area</label>
-                  <div class="input misc" id="hero-area"></div>
+                  <div class="input misc" id="hero-area">Computer Science</div>
                   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px">
                     <div>
                       <label>Length</label>
@@ -77,7 +72,7 @@
         </div>
 
         <!-- Features — same container, sits naturally below the grid -->
-        <div class="mt-10 grid sm:grid-cols-3 gap-0 sm:divide-x sm:divide-neutral-200/50">
+        <div class="mt-10 grid sm:grid-cols-3 gap-6 sm:gap-0 sm:divide-x sm:divide-neutral-200/50">
           <div class="sm:pr-8">
             <span class="eyebrow">01</span>
             <h3 class="font-semibold text-sm mt-1 mb-1">AI Video Lessons</h3>
@@ -86,7 +81,7 @@
           <div class="sm:px-8">
             <span class="eyebrow">02</span>
             <h3 class="font-semibold text-sm mt-1 mb-1">Before and After Quizzes</h3>
-            <p class="text-xs text-neutral-500 leading-relaxed">Test before and after each lesson to see exactly how much you learned.</p>
+            <p class="text-xs text-neutral-500 leading-relaxed">Test before and after each lesson to check your understanding.</p>
           </div>
           <div class="sm:pl-8">
             <span class="eyebrow">03</span>
@@ -109,7 +104,13 @@
           { topic: "Bayes theorem applied to genetics data",  area: "Biology"           },
           { topic: "Why black holes bend light",              area: "Physics"           },
         ];
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         let idx = 0, charIdx = 0, deleting = false;
+        let timer;
+        document.addEventListener("visibilitychange", () => {
+          clearTimeout(timer);
+          if (!document.hidden) tick();
+        });
         if (areaEl) areaEl.textContent = examples[0].area;
         function tick() {
           const text = examples[idx].topic;
@@ -125,7 +126,7 @@
             charIdx++;
             if (charIdx > text.length + 10) deleting = true;
           }
-          setTimeout(tick, deleting ? 28 : 55);
+          timer = setTimeout(tick, deleting ? 28 : 55);
         }
         tick();
       })();

@@ -261,7 +261,8 @@ body {
 /* ---------- Onboarding ---------- */
 
 .onboarding-stage {
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   position: relative;
 }
 
@@ -273,6 +274,9 @@ body {
   gap: 28px;
   align-items: center;
   padding: 80px 28px 120px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  align-content: start;
   opacity: 0;
   pointer-events: none;
   transform: translateY(24px) scale(0.98);
@@ -438,12 +442,8 @@ body {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   background: rgb(10 10 10);
-}
-
-.demo-window-video::-webkit-media-controls {
-  display: none !important;
 }
 
 /* Slide 1 — hero glyph */
@@ -843,9 +843,9 @@ body {
 }
 
 .onboarding-dot {
-  width: 6px;
-  height: 6px;
-  border: 0;
+  width: 18px;
+  height: 18px;
+  border: 6px solid white;
   border-radius: 999px;
   background: rgb(212 212 212);
   cursor: pointer;
@@ -856,7 +856,7 @@ body {
 }
 
 .onboarding-dot.active {
-  width: 24px;
+  width: 36px;
   background: rgb(10 10 10);
 }
 
@@ -1836,4 +1836,22 @@ body {
 
 .quiz-back-link:hover {
   color: rgb(23 23 23);
+}
+
+/* Keep the landing page and walkthrough usable on short and narrow screens. */
+.onboarding-slide > *, .page-shell > * { min-width: 0; }
+.onboarding-slide .walkthrough-stage { align-self: center; }
+.onboarding-slide .demo-window-video { aspect-ratio: 1436 / 1080; }
+#obRoot .walkthrough-body-simple { aspect-ratio: 1436 / 1080; }
+.onboarding-slide .walkthrough-stage { max-width: 900px; }
+@media (min-width: 900px) {
+  .onboarding-slide { align-content: center; }
+}
+@media (max-width: 480px) {
+  .onboarding-controls { left: 16px; right: 16px; gap: 8px; bottom: 16px; }
+  .onboarding-dots { gap: 2px; padding: 6px; }
+  .onboarding-controls .btn-primary, .onboarding-controls .btn-secondary { padding-inline: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }

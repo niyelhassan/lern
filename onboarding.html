@@ -3,17 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>lern — Instructions</title>
+    <title>lern — How it works</title>
+    <meta name="description" content="See how lern turns a topic into a video lesson, from the first quiz to the final results." />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./utilities.css" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="min-h-screen bg-[#f7f8fb] text-neutral-950 antialiased">
     <section
-      class="fixed inset-0 z-50 overflow-hidden bg-[#f7f8fb]"
+      class="fixed inset-0 z-50 bg-[#f7f8fb]"
       id="obRoot"
     >
-      <div class="onboarding-stage-bg"></div>
+      <div class="onboarding-stage-bg" aria-hidden="true"></div>
 
       <div class="ob-progress" aria-hidden="true">
         <span id="obProgress"></span>
@@ -51,11 +52,16 @@
                 class="demo-window-video"
                 muted
                 playsinline
-                preload="metadata"
+                controls
+                loop
+                preload="none"
+                width="1436"
+                height="1080"
                 data-demo-segment="0"
+                poster="./posters/step-1.jpg"
                 aria-label="Step 1 demo"
               >
-                <source src="./lern_demo.mp4" type="video/mp4" />
+                <source data-src="./media/topic.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -80,11 +86,16 @@
                 class="demo-window-video"
                 muted
                 playsinline
-                preload="metadata"
+                controls
+                loop
+                preload="none"
+                width="1436"
+                height="1080"
                 data-demo-segment="1"
+                poster="./posters/step-2.jpg"
                 aria-label="Step 2 demo"
               >
-                <source src="./lern_demo.mp4" type="video/mp4" />
+                <source data-src="./media/pre-quiz.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -109,11 +120,16 @@
                 class="demo-window-video"
                 muted
                 playsinline
-                preload="metadata"
+                controls
+                loop
+                preload="none"
+                width="1436"
+                height="1080"
                 data-demo-segment="2"
+                poster="./posters/step-3.jpg"
                 aria-label="Step 3 demo"
               >
-                <source src="./lern_demo.mp4" type="video/mp4" />
+                <source data-src="./media/lesson.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -123,10 +139,10 @@
         <article class="onboarding-slide" data-slide="3">
           <div>
             <span class="eyebrow-pill">Step 4</span>
-            <h1>Retake.<br />See the lift.</h1>
+            <h1>Take the<br />post-quiz.</h1>
             <p class="lead">
-              The same five questions, post-lesson. Your before and after scores
-              show exactly what you retained.
+              Answer the same five questions after the lesson to check
+              your understanding.
             </p>
           </div>
           <div class="walkthrough-stage">
@@ -138,11 +154,16 @@
                 class="demo-window-video"
                 muted
                 playsinline
-                preload="metadata"
+                controls
+                loop
+                preload="none"
+                width="1436"
+                height="1080"
                 data-demo-segment="3"
+                poster="./posters/step-4.jpg"
                 aria-label="Step 4 demo"
               >
-                <source src="./lern_demo.mp4" type="video/mp4" />
+                <source data-src="./media/post-quiz.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -355,23 +376,17 @@
         const prevBtn = document.getElementById("prevSlide");
         const nextBtn = document.getElementById("nextSlide");
         const progress = document.getElementById("obProgress");
-        const root = document.getElementById("obRoot");
         const demos = Array.from(
           document.querySelectorAll(".demo-window-video"),
         );
-        const demoSegments = [
-          { start: 0, end: 15 },
-          { start: 16, end: 29 },
-          { start: 30, end: 106 },
-          { start: 107, end: 115 },
-        ];
-        let demoDuration = 0;
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
         let active = 0;
 
         slides.forEach((_, i) => {
           const dot = document.createElement("button");
           dot.type = "button";
           dot.className = "onboarding-dot";
+          dot.setAttribute("aria-label", "Go to step " + (i + 1));
           dot.addEventListener("click", () => go(i));
           dotsRoot.appendChild(dot);
         });
@@ -381,9 +396,15 @@
           i = Math.max(0, Math.min(slides.length - 1, i));
           slides.forEach((slide, si) => {
             slide.classList.toggle("active", si === i);
+            slide.inert = si !== i;
+            slide.setAttribute("aria-hidden", String(si !== i));
+            if (si === i) slide.scrollTop = 0;
             slide.classList.toggle("exit-up", si < i);
           });
-          dots.forEach((dot, di) => dot.classList.toggle("active", di === i));
+          dots.forEach((dot, di) => {
+            dot.classList.toggle("active", di === i);
+            dot.setAttribute("aria-current", di === i ? "step" : "false");
+          });
           active = i;
           progress.style.width = ((i + 1) / slides.length) * 100 + "%";
           prevBtn.style.visibility = i === 0 ? "hidden" : "visible";
@@ -401,7 +422,8 @@
         });
 
         document.addEventListener("keydown", (event) => {
-          if (event.key === "ArrowRight" || event.key === "Enter") {
+          if (event.target instanceof Element && event.target.closest("video, input, textarea, select")) return;
+          if (event.key === "ArrowRight") {
             event.preventDefault();
             nextBtn.click();
           } else if (event.key === "ArrowLeft") {
@@ -412,89 +434,37 @@
           }
         });
 
-        let wheelLock = false;
-        root.addEventListener(
-          "wheel",
-          (event) => {
-            if (Math.abs(event.deltaY) < 24 || wheelLock) return;
-            wheelLock = true;
-            if (event.deltaY > 0) go(active + 1);
-            else go(active - 1);
-            setTimeout(() => (wheelLock = false), 720);
-          },
-          { passive: true },
-        );
-
-        let touchY = null;
-        root.addEventListener("touchstart", (event) => {
-          touchY = event.touches[0].clientY;
-        });
-        root.addEventListener("touchend", (event) => {
-          if (touchY == null) return;
-          const dy = touchY - event.changedTouches[0].clientY;
-          if (Math.abs(dy) > 40) {
-            if (dy > 0) go(active + 1);
-            else go(active - 1);
-          }
-          touchY = null;
-        });
-
-        function segmentBounds(video) {
-          const duration = demoDuration || video.duration || 0;
-          const segment = Number(video.dataset.demoSegment || 0);
-          const bounds = demoSegments[segment];
-          if (!bounds) return { start: 0, end: 0 };
-          return {
-            start: Math.min(bounds.start, duration),
-            end: Math.min(bounds.end, duration),
-          };
-        }
-
-        function restartSegment(video) {
-          const bounds = segmentBounds(video);
-          if (bounds.end <= bounds.start) return;
-          resetPlaybackSpeed(video);
-          video.currentTime = bounds.start;
-          video.play().catch(() => {});
-        }
-
-        function resetPlaybackSpeed(video) {
-          video.defaultPlaybackRate = 1;
-          video.playbackRate = 1;
-        }
-
         function playActiveDemo() {
           demos.forEach((video) => {
-            const slide = video.closest(".onboarding-slide");
-            const slideIdx = slide ? parseInt(slide.dataset.slide) : -1;
-            if (slideIdx === active) {
-              restartSegment(video);
-            } else {
+            const isActive = Number(video.dataset.demoSegment) === active;
+            if (!isActive || document.hidden) {
               video.pause();
+              return;
+            }
+            const source = video.querySelector("source");
+            if (!source.hasAttribute("src")) {
+              source.src = source.dataset.src;
+              video.load();
+            } else if (video.readyState >= 1) {
+              startSegment(video);
             }
           });
+        }
+
+        function startSegment(video) {
+          video.currentTime = 0;
+          if (!reducedMotion.matches && !document.hidden) video.play().catch(() => {});
         }
 
         demos.forEach((video) => {
-          resetPlaybackSpeed(video);
           video.addEventListener("loadedmetadata", () => {
-            resetPlaybackSpeed(video);
-            demoDuration = video.duration || demoDuration;
-            const slide = video.closest(".onboarding-slide");
-            const slideIdx = slide ? parseInt(slide.dataset.slide) : -1;
-            if (slideIdx === active) restartSegment(video);
+            if (Number(video.dataset.demoSegment) === active) startSegment(video);
           });
-          video.addEventListener("play", () => resetPlaybackSpeed(video));
-          video.addEventListener("timeupdate", () => {
-            const bounds = segmentBounds(video);
-            if (
-              bounds.end > bounds.start &&
-              video.currentTime >= bounds.end - 0.08
-            ) {
-              video.currentTime = bounds.start;
-              video.play().catch(() => {});
-            }
-          });
+        });
+        document.addEventListener("visibilitychange", playActiveDemo);
+        reducedMotion.addEventListener("change", () => {
+          if (reducedMotion.matches) demos.forEach((video) => video.pause());
+          else playActiveDemo();
         });
 
         go(0);
